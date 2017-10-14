@@ -1,13 +1,13 @@
 import { Component, OnInit} from '@angular/core';
 
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
 
 // Ngrx
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
-import 'rxjs/add/operator/map';
 import 'rxjs';
 
+import { PaymentDataService } from './payment-data.service';
 import { Payment } from "./Payment";
 import * as PaymentActions from './payment.action';
 
@@ -29,7 +29,8 @@ export class AppComponent implements OnInit {
   // Initializes the forms and sets their validation
   constructor(
     public fb:FormBuilder,
-    public store:Store<AppState>
+    public store:Store<AppState>,
+    public payService:PaymentDataService
   ){
     this.form = this.fb.group({
       amount: ['', Validators.required],
@@ -49,28 +50,6 @@ export class AppComponent implements OnInit {
     this.store.dispatch(
       new PaymentActions.getEffects()
     );
-  }
-
-  // Formats the payments
-  formatAmount(amt){
-    if (typeof amt === 'string'){
-      return '$ ' + amt;
-    }
-    try {
-      return '$ ' + amt.toFixed(2).toString();
-    } catch (e){
-      //console.log(e.message);
-    }
-  }
-
-  // Formats the dates
-  formatDate(date) {
-    try {
-      const newDate = new Date(date);
-      return ((newDate.getUTCMonth() + 1) + "/" + (newDate.getUTCDate()) + "/" + newDate.getFullYear());
-    } catch (e){
-      //console.log(e.message);
-    }
   }
 
   // Inserts a payment into the 'PaymentDataService' and gets the complete array back

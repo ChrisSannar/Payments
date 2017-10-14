@@ -23,7 +23,7 @@
   <hr>
   <ul class="list-group">
     <li class="list-group-item" *ngFor="let pay of payments$ | async">
-      {{ formatAmount(pay.amount) }}<span class="pull-right">{{ formatDate(pay.date) }}</span>
+      {{ pay.amount | currency : $ : 2 }}<span class="pull-right">{{ pay.date | date }}</span>
     </li>
   </ul>
 </div>
