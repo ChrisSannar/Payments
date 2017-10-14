@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http'
 
 import * as paymentActions from './payment.action';
-export type Actions = paymentActions.All;
 
 @Injectable()
 export class PaymentDataService {

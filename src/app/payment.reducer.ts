@@ -11,7 +11,7 @@ export function paymentReducer (state: Payment[] = [], action:Action){
     case PaymentActions.GET_PAYMENTS:
       return updatePayments(state, action);
 
-      // This is a dummy method that is caught by effects
+    // This is a dummy method that is caught by effects
     case PaymentActions.GET_EFFECTS:
       return state;
 
